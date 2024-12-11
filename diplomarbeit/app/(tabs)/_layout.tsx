@@ -6,7 +6,7 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         tabBarInactiveTintColor: "#FFFFFF",
-        tabBarActiveTintColor: '#FFFFFF', //"#ffde59", //gelb
+        tabBarActiveTintColor: '#FFFFFF',
         headerStyle : {
           backgroundColor: "#5b6bf5" //hellblau
         },
@@ -18,29 +18,40 @@ export default function TabsLayout() {
       }}
     >
       <Tabs.Screen name="index" options={{
-          headerTitle:"Gestures",
-          tabBarIcon : ({focused, color}) => (
+        headerTitle:"Gestures",
+        title: "Home",
+        tabBarIcon : ({focused, color}) => (
           <Ionicons 
-              name={focused ? "home" : "home-outline"} 
-              color={color}
-              size={30}/>)
-        }}/>
+            name={focused ? "home" : "home-outline"} 
+            color={color}
+            size={30}
+          />
+        )
+      }}/>
+
       <Tabs.Screen name="profile" options={{
-          headerTitle:"Profil",
-          tabBarIcon : ({focused, color}) => (
-            <Ionicons 
-                name={focused ? "person" : "person-outline"} 
-                color={color}
-                size={30}/>)
-        }}/>
-        <Tabs.Screen name="level" options={{
-          headerTitle:"Level",
-          tabBarIcon : ({focused, color}) => (
-            <Ionicons 
-                name={focused ? "game-controller" : "game-controller-outline"} 
-                color={color}
-                size={30}/>)
-        }}/>
+        headerTitle:"Profil",
+        title: "Profil",
+        tabBarIcon : ({focused, color}) => (
+          <Ionicons 
+            name={focused ? "person" : "person-outline"} 
+            color={color}
+            ize={30}
+          />
+        )
+      }}/>
+
+      <Tabs.Screen name="level" options={{
+        title: "Level",
+        headerTitle:"Level",
+        tabBarIcon : ({focused, color}) => (
+          <Ionicons 
+            name={focused ? "game-controller" : "game-controller-outline"} 
+            color={color}
+            size={30}/>
+        )
+      }}/>
+
       <Tabs.Screen name="+not-found" options={{headerTitle:"Not Found"}}/>
     </Tabs>
   );
