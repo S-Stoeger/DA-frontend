@@ -29,8 +29,7 @@ export default function Profile() {
     return levels
   }
   
-  return (
-    
+  return (    
     <View style={styles.container}>
 
       {/* Header will show which user is logged in
@@ -114,6 +113,16 @@ export default function Profile() {
 }
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 10,
+    flexDirection: 'column',
+    alignSelf: 'center',
+    margin: 10,
+    width: '30%'
+  },
   container: {
     flex: 3,
     alignItems: "center",

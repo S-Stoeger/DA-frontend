@@ -19,13 +19,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: '#272727'
+    backgroundColor: '#FFFFFF'
   },
   text: {
-    color: '#ffffff'
+    color: '#000000'
   },
   button: {
-    color: '#ffffff',
+    color: '#000000',
     textDecorationLine: "underline"
   }
 })
