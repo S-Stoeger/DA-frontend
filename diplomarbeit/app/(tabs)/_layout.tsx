@@ -33,6 +33,14 @@ export default function TabsLayout() {
                 color={color}
                 size={30}/>)
         }}/>
+        <Tabs.Screen name="level" options={{
+          headerTitle:"Level",
+          tabBarIcon : ({focused, color}) => (
+            <Ionicons 
+                name={focused ? "game-controller" : "game-controller-outline"} 
+                color={color}
+                size={30}/>)
+        }}/>
       <Tabs.Screen name="not-found" options={{headerTitle:"Not Found"}}/>
     </Tabs>
   );

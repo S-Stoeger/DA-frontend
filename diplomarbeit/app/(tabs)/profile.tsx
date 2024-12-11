@@ -1,3 +1,4 @@
+import LevelBox from "@/components/LevelBox";
 import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import { Text, View,StyleSheet } from "react-native";
@@ -22,11 +23,7 @@ export default function Profile() {
     var levels = []
 
     for (let i = 1; i <= latestFinishedLevel; i++) {
-      levels.push(
-        <View style={styles.levelBox}>
-          <Text style={styles.levelNumber}>{i}</Text>
-        </View>
-      )
+      levels.push(<LevelBox levelNumber={i} />)
     }
 
     return levels
@@ -179,27 +176,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     width: '60%',
     justifyContent: 'center'
-  },
-  levelBox: {
-    justifyContent: 'center',
-    backgroundColor: '#ebebeb',
-    borderRadius: 5,
-    padding: 20,
-    textAlign: 'center',
-    width: 100,
-    height: 100,
-    marginHorizontal: 10,
-    marginVertical: 5
-  },
-  levelNumber: {
-    backgroundColor: '#ffde59',
-    borderRadius: 200,
-    textAlign: 'center',
-    color: '#fff',
-    fontSize: 40,
-    padding: 10,
-    width: 60,
-    height: 60
   },
   headlines: {
     width: '60%', 
