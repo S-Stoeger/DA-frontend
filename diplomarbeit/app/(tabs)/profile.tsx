@@ -5,7 +5,7 @@ import { Image } from "react-native";
 
 export default function Profile() {
   const PlaceHolderImage = require("../../assets/images/profile-pic.png")
-  const numbreOfAllLevels = 20
+  const numberOfAllLevels = 20
 
   //TODO: get from Db
   var currUser = "Default User"
@@ -30,17 +30,6 @@ export default function Profile() {
     }
 
     return levels
-  }
-
-  {/* Function calculates how many Levels have been done / have not been done and will return the number
-      if  todo = true =>  returns number of levels that are still not done / have to yet be done
-          todo = false => returns number of levels that have been done
-  */}
-  function calcLevels(todo: boolean)  {
-
-    
-    //TODO
-
   }
   
   return (
@@ -96,18 +85,24 @@ export default function Profile() {
  
 
         {/* STATISTIKS: */}
+        {/* TODO: Verschönern!!!!: */}
         <Text style={styles.headlines}>Deine Statistiken: </Text>
         <View style={{marginBottom:20}}>
+
           {/* ELERDIGTE LEVELS: */}
           <Text style={styles.headlinesButSmaller}>Erledigt: </Text>
-          <View style={{backgroundColor: '#7ed957'}}>
-            5S
+          <View style={styles.statisticsBox}>
+            <Ionicons name="checkmark-outline" size={25} color={'#7ed957'} style={{ alignSelf: 'center', paddingRight: 5}}></Ionicons>
+            <Text style={{color: '#7ed957', alignSelf: 'center', fontSize: 20}}>{latestFinishedLevel}/{numberOfAllLevels}</Text>
           </View>
 
 
           {/* UNERLEFIGTE LEVELS: */}
           <Text style={styles.headlinesButSmaller}>Unerledigt: </Text>
-
+          <View style={styles.statisticsBox}>
+            <Ionicons name="time" size={25} color={'#f7828e'} style={{ alignSelf: 'center', paddingRight: 5}}></Ionicons>
+            <Text style={{color: '#f7828e', alignSelf: 'center', fontSize: 20}}>{numberOfAllLevels-latestFinishedLevel}/{numberOfAllLevels}</Text>
+          </View>
 
         </View>
 
@@ -210,13 +205,15 @@ const styles = StyleSheet.create({
     width: '60%', 
     alignSelf: 'center', 
     fontSize: 20, 
-    marginLeft: 50
+    marginLeft: 50,
+    paddingBottom: 5
   },
   headlinesButSmaller: {
     width: '60%', 
     alignSelf: 'center', 
     fontSize: 16, 
     marginLeft: 50
-  }
+  },
+  statisticsBox: {flexDirection: 'row', justifyContent: 'center'}
 
 })
