@@ -8,7 +8,6 @@ type Props = {
 
 export default function LevelBox ({levelNumber, hexColor}: Props) {
 
-
     var level = (
         <View style={styles.levelBox}>
           <Text style={[styles.levelNumber, {backgroundColor: hexColor}]}>{levelNumber}</Text>
@@ -24,18 +23,20 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 20,
         textAlign: 'center',
-        width: 100,
-        height: 100,
+        width: 120,
+        height: 120,
         marginHorizontal: 10,
         marginVertical: 5
     },
     levelNumber: {
         borderRadius: 200,
         textAlign: 'center',
+        alignSelf: 'center',
+        alignContent: 'center',
         color: '#fff',
         fontSize: 40,
-        padding: 10,
-        width: 60,
-        height: 60
+        paddingTop: 8,
+        width: 70,
+        height: 70
     }
 })

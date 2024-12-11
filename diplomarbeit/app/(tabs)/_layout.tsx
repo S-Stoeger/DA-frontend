@@ -41,7 +41,7 @@ export default function TabsLayout() {
                 color={color}
                 size={30}/>)
         }}/>
-      <Tabs.Screen name="not-found" options={{headerTitle:"Not Found"}}/>
+      <Tabs.Screen name="+not-found" options={{headerTitle:"Not Found"}}/>
     </Tabs>
   );
 }

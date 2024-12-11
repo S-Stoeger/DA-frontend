@@ -1,100 +1,101 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
-import { Text, View,StyleSheet } from "react-native";
+import { Text, View,StyleSheet, ScrollView } from "react-native";
 import LevelBox from "@/components/LevelBox";
 
 export default function Index() {
-
   const maxStarsPossible = 5;
+  const numberOfLevels = 20;
   const hexGreen = "#00bf63";
   const hexOrange = "#f5b664";
   const hexRed = "#de3737";
   const hexYellow = "#ffde59";
-  
 
-  //TODO: get number of Stars for each Level from DB and show right value of stars 
-  var userStars
+  function getStars(level: number) {
+    let stars = [];
+    let userStars;
 
-  function getStars(level:number) {
-    var stars = []
-
-    //Temporary until Database is functioning
+    // Temporary until Database is functioning
     switch (level) {
       case 1:
-        userStars = 5
-        break
+      case 5:
+      case 10:
+      case 15:
+        userStars = 5; // Max stars
+        break;
       case 2:
-        userStars = 4
-        break
+      case 6:
+      case 11:
+      case 16:
+        userStars = 4;
+        break;
       case 3:
-        userStars = 2
-        break
-      //etc...  
+      case 7:
+      case 13:
+      case 17:
+        userStars = 2;
+        break;
+      case 4:
+      case 8:
+      case 14:
+      case 18:
+        userStars = 1;
+        break;
       default:
-        userStars = 0
+        userStars = 0;
     }
 
-    //puts full stars / stars user actually got
+    // Full stars the user got
     for (let i = 0; i < userStars; i++) {
       stars.push(
-        <Ionicons name="star" color={hexYellow}></Ionicons>
-      )
-      
+        <Ionicons key={`full-star-${level}-${i}`} name="star" color={hexYellow} size={15} />
+      );
     }
 
-    //checks if user got 5 stars
-    if (userStars != maxStarsPossible) {
-      //if not puts outlines for stars you could have gotten
-      for (let i = userStars; i < maxStarsPossible; i++) {
-        stars.push(
-          <Ionicons name="star-outline" color={hexYellow}></Ionicons>
-        )
-      }
+    // Outline stars for remaining possible stars
+    for (let i = userStars; i < maxStarsPossible; i++) {
+      stars.push(
+        <Ionicons key={`outline-star-${level}-${i}`} name="star-outline" color={hexYellow} size={15} />
+      );
     }
-    
-    return stars
+
+    return { stars, userStars };
+  }
+
+  function getColor(userStars: number) {
+    if (userStars >= 4) return hexGreen;
+    if (userStars >= 2) return hexOrange;
+    return hexRed;
   }
 
   return (
-    //TODO: Connect Levels
-    <View style={styles.container}>
-      
-      <View style={styles.boxOdd}>
-        <View style={styles.starsBox}> {getStars(1)}</View>
-        <LevelBox levelNumber={1} hexColor={hexGreen}/>
-      </View>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      {Array.from({ length: numberOfLevels }, (_, index) => {
+        const { stars, userStars } = getStars(index + 1);
+        const color = getColor(userStars);
 
-      <View style={styles.boxEven}>
-        <View style={styles.starsBox}> {getStars(2)} </View>
-        <LevelBox levelNumber={2} hexColor={hexGreen}/>
-      </View>
-
-      <View style={styles.boxOdd}>
-        <View style={styles.starsBox}>
-          {getStars(3)}
-        </View>
-        <LevelBox levelNumber={3} hexColor={hexOrange}/>
-      </View>
-
-      <View style={styles.boxEven}>
-        <View style={styles.starsBox}>
-          {getStars(4)}
-        </View>
-        <LevelBox levelNumber={4} hexColor={hexRed}/>
-      </View>
-
-
-
-    </View>
+        return (
+          <View
+            key={`level-${index + 1}`}
+            style={index % 2 === 0 ? styles.boxOdd : styles.boxEven}
+          >
+            <View style={styles.starsBox}>{stars}</View>
+            <LevelBox levelNumber={index + 1} hexColor={color} />
+          </View>
+        );
+      })}
+    </ScrollView>
   );
 }
 
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'column',
+  scrollContainer: {
+    flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
+    paddingVertical: 10,
+    flexDirection: 'column',
     alignSelf: 'center',
     margin: 10,
     width: '30%'
@@ -105,7 +106,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     justifyContent: 'center',
     padding: 10,
-    marginBottom: 10
   },
   boxEven: {
     alignSelf: 'flex-end'
