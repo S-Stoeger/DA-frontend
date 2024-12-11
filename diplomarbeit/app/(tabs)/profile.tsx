@@ -23,7 +23,7 @@ export default function Profile() {
     var levels = []
 
     for (let i = 1; i <= latestFinishedLevel; i++) {
-      levels.push(<LevelBox levelNumber={i} />)
+      levels.push(<LevelBox levelNumber={i} hexColor="#ffde59"/>)
     }
 
     return levels

@@ -2,16 +2,18 @@ import { Text, View,StyleSheet } from "react-native";
 
 type Props = {
     levelNumber: number;
+    hexColor: string;
 }
 
 
-export default function LevelBox ({levelNumber}: Props) {
+export default function LevelBox ({levelNumber, hexColor}: Props) {
+
+
     var level = (
         <View style={styles.levelBox}>
-          <Text style={styles.levelNumber}>{levelNumber}</Text>
+          <Text style={[styles.levelNumber, {backgroundColor: hexColor}]}>{levelNumber}</Text>
         </View>)
       
-
     return level
 }
 
@@ -28,7 +30,6 @@ const styles = StyleSheet.create({
         marginVertical: 5
     },
     levelNumber: {
-        backgroundColor: '#ffde59',
         borderRadius: 200,
         textAlign: 'center',
         color: '#fff',
