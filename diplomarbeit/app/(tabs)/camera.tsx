@@ -1,8 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect,} from 'react';
 import { Camera, CameraType, CameraView } from 'expo-camera'; // Ensure proper imports
-import { Button, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View, Image, Alert } from 'react-native';
 
-export default function CameraPage() {
+export default function App() {
   const [facing, setFacing] = useState<CameraType>('back');
   const [permission, setPermission] = useState<boolean | null>(null);
   const [photoUri, setPhotoUri] = useState<string | null>(null);
@@ -50,6 +50,52 @@ export default function CameraPage() {
     }
   };
 
+  const uploadPhoto = async () => {
+    if (!photoUri) {
+      Alert.alert('No photo to upload');
+      return;
+    }
+
+    try {
+      // Fetch the file from the URI
+      const response = await fetch(photoUri);
+      const blob = await response.blob(); // Convert the response to a Blob
+  
+      const formData = new FormData();
+      
+      // Set a fixed filename "sign.jpg"
+      const filename = 'sign.jpg';
+      const type = 'image/jpeg'; // Set MIME type as JPEG for the fixed filename
+  
+      // Append the Blob to FormData with the fixed filename
+      formData.append('image', blob, filename);
+  
+      const serverResponse = await fetch('http://127.0.0.1:5000/predict', {
+        method: 'POST',
+        body: formData,
+      });
+  
+      if (serverResponse.ok) {
+        const data = await serverResponse.json();
+        console.log('Prediction Success', `Prediction: ${data.prediction}`);
+        
+        //Alert.alert('Prediction Success', `Prediction: ${data.prediction}`);
+      } else {
+        console.log('Prediction Failed',
+          `Server responded with status: ${serverResponse.status}`);
+          /*
+        Alert.alert(
+          'Prediction Failed',
+          `Server responded with status: ${serverResponse.status}`,
+        );
+        */
+      }
+    } catch (error) {
+      console.error('Failed to upload photo:', error);
+      Alert.alert('Upload Error', (error as Error).message);
+    }
+  };
+  
   return (
     <View style={styles.container}>
       {!photoUri ? (
@@ -57,7 +103,7 @@ export default function CameraPage() {
           <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
               <Text style={styles.text}>Flip Camera</Text>
-            </TouchableOpacity>pho
+            </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={takePicture}>
               <Text style={styles.text}>Take Picture</Text>
             </TouchableOpacity>
@@ -66,13 +112,13 @@ export default function CameraPage() {
       ) : (
         <>
           <Image source={{ uri: photoUri }} style={styles.preview} />
+          <Button title="Upload Photo" onPress={uploadPhoto} />
           <Button title="Retake Picture" onPress={() => setPhotoUri(null)} />
         </>
       )}
     </View>
   );
 }
-
 
 // Styles
 const styles = StyleSheet.create({
