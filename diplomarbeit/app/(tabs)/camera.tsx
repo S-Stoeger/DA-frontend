@@ -38,65 +38,50 @@ export default function App() {
     setFacing((current) => (current === 'back' ? 'front' : 'back'));
   };
 
-  const takePicture = async () => {
+
+  const takePictureAndUpload = async () => {
     if (cameraRef.current) {
       try {
+        // Take picture
         const photo = await cameraRef.current.takePictureAsync();
         setPhotoUri(photo!.uri);
         console.log('Picture taken:', photo!.uri);
+  
+        // Upload photo
+        const response = await fetch(photo!.uri);
+        const blob = await response.blob();
+  
+        const formData = new FormData();
+        const filename = 'sign.jpg';
+        const type = 'image/jpeg';
+  
+        formData.append('image', blob, filename);
+  
+        const serverResponse = await fetch('http://127.0.0.1:5000/predict', {
+          method: 'POST',
+          body: formData,
+        });
+  
+        if (serverResponse.ok) {
+          const data = await serverResponse.json();
+          console.log('Prediction Success', `Prediction: ${data.prediction}`);
+          document.getElementById('yourPrediction')!.innerText =
+            "Predicted Letter: \n" + data.prediction;
+        } else {
+          console.log(
+            'Prediction Failed',
+            `Server responded with status: ${serverResponse.status}`
+          );
+          document.getElementById('yourPrediction')!.innerText =
+            'Failed to predict a Letter, try again';
+        }
       } catch (error) {
-        console.error('Failed to take picture:', error);
+        console.error('Failed to take picture or upload photo:', error);
+        Alert.alert('Error', (error as Error).message);
       }
     }
   };
-
-  const uploadPhoto = async () => {
-    if (!photoUri) {
-      Alert.alert('No photo to upload');
-      return;
-    }
-
-    try {
-      // Fetch the file from the URI
-      const response = await fetch(photoUri);
-      const blob = await response.blob(); 
   
-      const formData = new FormData();
-      
-      // Set filename "sign.jpg"
-      const filename = 'sign.jpg';
-      const type = 'image/jpeg'; // Set MIME type as JPEG for the fixed filename
-  
-      // Append the Blob to FormData with the fixed filename
-      formData.append('image', blob, filename);
-  
-      const serverResponse = await fetch('http://127.0.0.1:5000/predict', {
-        method: 'POST',
-        body: formData,
-      });
-  
-      if (serverResponse.ok) {
-        const data = await serverResponse.json();
-        console.log('Prediction Success', `Prediction: ${data.prediction}`);
-        document.getElementById('yourPrediction')!.innerText = "Predicted Letter: \n" + data.prediction;
-        
-      } else {
-        console.log('Prediction Failed',
-          `Server responded with status: ${serverResponse.status}`);
-        document.getElementById('yourPrediction')!.innerText = "Failed to predict a Letter, try again"
-
-          /*
-        Alert.alert(
-          'Prediction Failed',
-          `Server responded with status: ${serverResponse.status}`,
-        );
-        */
-      }
-    } catch (error) {
-      console.error('Failed to upload photo:', error);
-      Alert.alert('Upload Error', (error as Error).message);
-    }
-  };
   
   return (
     <View style={styles.container}>
@@ -106,7 +91,7 @@ export default function App() {
             <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
               <Text style={styles.text}>Flip Camera</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={takePicture}>
+            <TouchableOpacity style={styles.button} onPress={takePictureAndUpload}>
               <Text style={styles.text}>Take Picture</Text>
             </TouchableOpacity>
           </View>
@@ -115,7 +100,6 @@ export default function App() {
         <>
           <Text style={styles.predictionText} id='yourPrediction'>Predicted Letter:</Text>
           <Image source={{ uri: photoUri }} style={styles.preview} />
-          <Button title="Upload Photo" onPress={uploadPhoto} />
           <Button title="Retake Picture" onPress={() => setPhotoUri(null)} />
         </>
       )}
