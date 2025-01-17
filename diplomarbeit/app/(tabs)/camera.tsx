@@ -100,7 +100,14 @@ export default function App() {
         <>
           <Text style={styles.predictionText} id='yourPrediction'>Predicted Letter:</Text>
           <Image source={{ uri: photoUri }} style={styles.preview} />
-          <Button title="Retake Picture" onPress={() => setPhotoUri(null)} />
+
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button} onPress={() => setPhotoUri(null)}>
+              <Text style={styles.text}>Retake Picture</Text>
+            </TouchableOpacity>
+          </View>
+          
+      
         </>
       )}
     </View>
@@ -121,12 +128,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   buttonContainer: {
-    flex: 1,
+    position: 'absolute',
+    bottom: 20,
+    left: 0,
+    right: 0,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'flex-end',
     backgroundColor: 'transparent',
-    margin: 20,
   },
   button: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',

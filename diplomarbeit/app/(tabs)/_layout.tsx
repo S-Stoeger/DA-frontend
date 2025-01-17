@@ -36,7 +36,7 @@ export default function TabsLayout() {
           <Ionicons 
             name={focused ? "person" : "person-outline"} 
             color={color}
-            ize={30}
+            size={30}
           />
         )
       }}/>
@@ -47,6 +47,17 @@ export default function TabsLayout() {
         tabBarIcon : ({focused, color}) => (
           <Ionicons 
             name={focused ? "game-controller" : "game-controller-outline"} 
+            color={color}
+            size={30}/>
+        )
+      }}/>
+
+      <Tabs.Screen name="camera" options={{
+        title: "Camera",
+        headerTitle:"Camera",
+        tabBarIcon : ({focused, color}) => (
+          <Ionicons 
+            name={focused ? "camera" : "camera-outline"} 
             color={color}
             size={30}/>
         )
