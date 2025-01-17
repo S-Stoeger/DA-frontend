@@ -65,15 +65,15 @@ export default function App() {
         if (serverResponse.ok) {
           const data = await serverResponse.json();
           console.log('Prediction Success', `Prediction: ${data.prediction}`);
-          document.getElementById('yourPrediction')!.innerText =
-            "Predicted Letter: \n" + data.prediction;
+
+          document.getElementById('prediction00')!.innerText = "Predicted Letter: \n" + data.prediction;
+
         } else {
           console.log(
             'Prediction Failed',
             `Server responded with status: ${serverResponse.status}`
           );
-          document.getElementById('yourPrediction')!.innerText =
-            'Failed to predict a Letter, try again';
+          document.getElementById('prediction00')!.innerText = 'Failed to predict a Letter, try again';
         }
       } catch (error) {
         console.error('Failed to take picture or upload photo:', error);
@@ -98,7 +98,6 @@ export default function App() {
         </CameraView>
       ) : (
         <>
-          <Text style={styles.predictionText} id='yourPrediction'>Predicted Letter:</Text>
           <Image source={{ uri: photoUri }} style={styles.preview} />
 
           <View style={styles.buttonContainer}>
@@ -107,6 +106,11 @@ export default function App() {
             </TouchableOpacity>
           </View>
           
+          <View style={styles.predictionContainer}>
+            <TouchableOpacity style={styles.button}>
+              <Text id='prediction00' style={styles.predictionText}></Text>
+            </TouchableOpacity>
+          </View>
       
         </>
       )}
@@ -136,6 +140,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     backgroundColor: 'transparent',
   },
+  predictionContainer: {
+    position: 'absolute',
+    top: 40,
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: 'transparent',
+  },
   button: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     padding: 10,
@@ -153,7 +166,7 @@ const styles = StyleSheet.create({
   },
   predictionText: {
     fontSize: 30,
-    color: 'black',
+    color: 'white',
     fontWeight: 'bold',
     justifyContent:'center',
     textAlign: 'center',
