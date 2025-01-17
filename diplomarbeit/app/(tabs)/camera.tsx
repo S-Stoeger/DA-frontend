@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect,} from 'react';
-import { Camera, CameraType, CameraView } from 'expo-camera'; // Ensure proper imports
+import { Camera, CameraType, CameraView } from 'expo-camera';
 import { Button, StyleSheet, Text, TouchableOpacity, View, Image, Alert } from 'react-native';
 
 export default function App() {
   const [facing, setFacing] = useState<CameraType>('back');
   const [permission, setPermission] = useState<boolean | null>(null);
   const [photoUri, setPhotoUri] = useState<string | null>(null);
-  const cameraRef = useRef<CameraView>(null); // Correctly set the ref type to CameraView
+  const cameraRef = useRef<CameraView>(null); 
 
   useEffect(() => {
     (async () => {
@@ -59,11 +59,11 @@ export default function App() {
     try {
       // Fetch the file from the URI
       const response = await fetch(photoUri);
-      const blob = await response.blob(); // Convert the response to a Blob
+      const blob = await response.blob(); 
   
       const formData = new FormData();
       
-      // Set a fixed filename "sign.jpg"
+      // Set filename "sign.jpg"
       const filename = 'sign.jpg';
       const type = 'image/jpeg'; // Set MIME type as JPEG for the fixed filename
   
@@ -78,11 +78,13 @@ export default function App() {
       if (serverResponse.ok) {
         const data = await serverResponse.json();
         console.log('Prediction Success', `Prediction: ${data.prediction}`);
+        document.getElementById('yourPrediction')!.innerText = "Predicted Letter: \n" + data.prediction;
         
-        //Alert.alert('Prediction Success', `Prediction: ${data.prediction}`);
       } else {
         console.log('Prediction Failed',
           `Server responded with status: ${serverResponse.status}`);
+        document.getElementById('yourPrediction')!.innerText = "Failed to predict a Letter, try again"
+
           /*
         Alert.alert(
           'Prediction Failed',
@@ -111,6 +113,7 @@ export default function App() {
         </CameraView>
       ) : (
         <>
+          <Text style={styles.predictionText} id='yourPrediction'>Predicted Letter:</Text>
           <Image source={{ uri: photoUri }} style={styles.preview} />
           <Button title="Upload Photo" onPress={uploadPhoto} />
           <Button title="Retake Picture" onPress={() => setPhotoUri(null)} />
@@ -155,5 +158,12 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: '100%',
+  },
+  predictionText: {
+    fontSize: 30,
+    color: 'black',
+    fontWeight: 'bold',
+    justifyContent:'center',
+    textAlign: 'center',
   },
 });
