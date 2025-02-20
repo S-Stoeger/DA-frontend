@@ -8,6 +8,9 @@ export default function App() {
   const [photoUri, setPhotoUri] = useState<string | null>(null);
   const cameraRef = useRef<CameraView>(null); 
 
+  const styles = require('../style');
+
+
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
@@ -21,7 +24,7 @@ export default function App() {
 
   if (!permission) {
     return (
-      <View style={styles.container}>
+      <View style={styles.cameraContainer}>
         <Text style={styles.message}>We need your permission to use the camera</Text>
         <Button
           onPress={async () => {
@@ -84,7 +87,7 @@ export default function App() {
   
   
   return (
-    <View style={styles.container}>
+    <View style={styles.cameraContainer}>
       {!photoUri ? (
         <CameraView style={styles.camera} facing={facing} ref={cameraRef}>
           <View style={styles.buttonContainer}>
@@ -118,6 +121,7 @@ export default function App() {
   );
 }
 
+/*
 // Styles
 const styles = StyleSheet.create({
   container: {
@@ -172,3 +176,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+*/

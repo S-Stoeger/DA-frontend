@@ -41,9 +41,9 @@ export default function TabsLayout() {
         )
       }}/>
 
-      <Tabs.Screen name="level" options={{
-        title: "Level",
-        headerTitle:"Level",
+      <Tabs.Screen name="level_overview" options={{
+        title: "Levels",
+        headerTitle:"Levels",
         tabBarIcon : ({focused, color}) => (
           <Ionicons 
             name={focused ? "game-controller" : "game-controller-outline"} 
@@ -63,7 +63,8 @@ export default function TabsLayout() {
         )
       }}/>
 
-      <Tabs.Screen name="+not-found" options={{headerTitle:"Not Found"}}/>
+      <Tabs.Screen name="level" options={{tabBarItemStyle: {display:"none"}}}/>
+
     </Tabs>
   );
 }
