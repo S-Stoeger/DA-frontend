@@ -10,12 +10,6 @@ export default function Level(){
     const params = useGlobalSearchParams();
     const [text, setText] = useState('');
 
-    let is = ''
-
-    function setIsLetter(letter:string){
-        is = letter;
-    }
-
 
     function checkLetter(actuallLetter:string){
 
@@ -28,7 +22,7 @@ export default function Level(){
 
     }
 
-
+    
 
     return (
         <ScrollView style={styles.levelDetail}> {
@@ -53,10 +47,11 @@ export default function Level(){
                         <Image source={{uri: "../../assets/images/C.jpg"}} style={styles.letterPicture} />
                     </View>
                 </View>
+
                 <div style={styles.divider}></div>
 
-
-                {//FIXME: es ko immer nur a buchstabe gleichzeitig richtig sei
+                <View>
+            {//FIXME: es ko immer nur a buchstabe gleichzeitig richtig sei
                 }
                 <h2>Welcher Buchstabe ist das?</h2>
                 <View style={{flexDirection: "column", alignSelf: 'center'}}>
@@ -94,7 +89,9 @@ export default function Level(){
 
                 {//TODO: selber foto machen
                 }
-                
+            </View>
+
+
             </View>
            
 
