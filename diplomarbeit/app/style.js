@@ -1,6 +1,9 @@
 'use strict';
 import { StyleSheet } from 'react-native';
 
+//const styles = require('../style');
+
+
 module.exports = StyleSheet.create({
 
     /**** Level Overview ****/
@@ -15,11 +18,21 @@ module.exports = StyleSheet.create({
         width: '30%'
     },
     starsBox: {
+        flexDirection: 'row',
+        borderRadius: 5,
+        justifyContent: 'center',
+        padding: 10,
+        color: 'white',
+        textAlign: 'center'
+    },
+    playButton: {
         backgroundColor: '#5b6bf5',
         flexDirection: 'row',
         borderRadius: 5,
         justifyContent: 'center',
         padding: 10,
+        color: 'white',
+        textAlign: 'center'
     },
     boxEven: {
         alignSelf: 'flex-end'
@@ -27,6 +40,39 @@ module.exports = StyleSheet.create({
     boxOdd: {
         alignSelf: 'flex-start'
     },
+    playText: {
+        fontFamily : 'Arial, sans-serif',
+        textAlign: 'center'
+    },
+    levelBox: {
+        padding: 25,
+        borderRadius: 15,
+        backgroundColor: '#cfcaca'
+    },
+
+    /**** *****/
+    levelBoxInnen: {
+        justifyContent: 'center',
+        borderRadius: 5,
+        padding: 20,
+        textAlign: 'center',
+        width: 120,
+        height: 120,
+        marginHorizontal: 10,
+        marginVertical: 5
+    },
+    levelNumber: {
+        borderRadius: 15,
+        textAlign: 'center',
+        alignSelf: 'center',
+        alignContent: 'center',
+        justifyContent: 'center',
+        color: '#fff',
+        fontSize: 40,
+        paddingHorizontal: 50,
+        paddingVertical: 35,
+    },
+
 
     /***** Camera *****/
     cameraContainer: {
@@ -154,7 +200,7 @@ module.exports = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         width: '60%',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     headlines: {
         width: '60%',

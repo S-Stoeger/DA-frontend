@@ -73,10 +73,6 @@ export default function Index() {
   }
 
 
-  function playLevel(){
-    alert("pressed level")
-  }
-
   return (
     <ScrollView contentContainerStyle={styles.scrollContainerOverview}>
       {Array.from({ length: numberOfLevels }, (_, index) => {
@@ -87,15 +83,13 @@ export default function Index() {
         return (
           <View
             key={`level-${currLevel}`}
-            style={index % 2 === 0 ? styles.boxOdd : styles.boxEven}
+            style={[styles.levelBox, index % 2 === 0 ? styles.boxOdd : styles.boxEven]}
           >
-            <View style={styles.starsBox}>{stars}</View>
             <LevelBox levelNumber={currLevel} hexColor={color} />
-            
-             <Link href={`/level?id=${currLevel}` }>
-              <Ionicons name="play">Play Level {index+1}</Ionicons>
+            <View style={styles.starsBox}>{stars}</View>            
+            <Link style={styles.playButton} href={`/level?id=${currLevel}` }>
+            <Ionicons name="play"><Text style={styles.playText}>Play Level {index+1}</Text> </Ionicons>
             </Link>
-            
             
           </View>
         );
