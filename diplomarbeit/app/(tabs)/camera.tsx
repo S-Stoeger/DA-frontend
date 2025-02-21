@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect,} from 'react';
 import { Camera, CameraType, CameraView } from 'expo-camera';
-import { Button, StyleSheet, Text, TouchableOpacity, View, Image, Alert } from 'react-native';
+import { Button, Text, TouchableOpacity, View, Image, Alert } from 'react-native';
 
 export default function App() {
   const [facing, setFacing] = useState<CameraType>('back');
@@ -120,61 +120,3 @@ export default function App() {
     </View>
   );
 }
-
-/*
-// Styles
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  message: {
-    textAlign: 'center',
-    paddingBottom: 10,
-  },
-  camera: {
-    flex: 1,
-  },
-  buttonContainer: {
-    position: 'absolute',
-    bottom: 20,
-    left: 0,
-    right: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    backgroundColor: 'transparent',
-  },
-  predictionContainer: {
-    position: 'absolute',
-    top: 40,
-    left: 0,
-    right: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    backgroundColor: 'transparent',
-  },
-  button: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    padding: 10,
-    borderRadius: 5,
-  },
-  text: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  preview: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-  },
-  predictionText: {
-    fontSize: 30,
-    color: 'white',
-    fontWeight: 'bold',
-    justifyContent:'center',
-    textAlign: 'center',
-  },
-});
-
-*/

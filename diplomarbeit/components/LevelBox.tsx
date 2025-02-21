@@ -17,9 +17,3 @@ export default function LevelBox ({levelNumber, hexColor}: Props) {
       
     return level
 }
-
-/*
-const styles = StyleSheet.create({
-    
-})
-    */

@@ -63,7 +63,11 @@ export default function TabsLayout() {
         )
       }}/>
 
+    {/*
+      TODO: auskommentieren / nur da, weil es leichter ist so zu programmieren
       <Tabs.Screen name="level" options={{tabBarItemStyle: {display:"none"}}}/>
+    */}
+      
 
     </Tabs>
   );

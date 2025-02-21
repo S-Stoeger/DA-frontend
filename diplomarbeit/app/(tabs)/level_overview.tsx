@@ -18,7 +18,7 @@ export default function Index() {
     let stars = [];
     let userStars;
 
-    // Temporary until Database is functioning
+    //FIXME: Temporary until Database is functioning
     switch (level) {
       case 1:
       case 5:
@@ -88,7 +88,7 @@ export default function Index() {
             <LevelBox levelNumber={currLevel} hexColor={color} />
             <View style={styles.starsBox}>{stars}</View>            
             <Link style={styles.playButton} href={`/level?id=${currLevel}` }>
-            <Ionicons name="play"><Text style={styles.playText}>Play Level {index+1}</Text> </Ionicons>
+              <Ionicons name="play"><Text style={styles.playText}>Play Level {index+1}</Text> </Ionicons>
             </Link>
             
           </View>

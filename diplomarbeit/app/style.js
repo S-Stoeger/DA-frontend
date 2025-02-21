@@ -50,7 +50,6 @@ module.exports = StyleSheet.create({
         backgroundColor: '#cfcaca'
     },
 
-    /**** *****/
     levelBoxInnen: {
         justifyContent: 'center',
         borderRadius: 5,
@@ -73,6 +72,35 @@ module.exports = StyleSheet.create({
         paddingVertical: 35,
     },
 
+    /**** Level Detail ****/
+    levelDetail: {
+       textAlign: 'center',
+       fontFamily : 'Arial, sans-serif',
+       flex:1
+    },
+    letterPicture:{
+        height: 200,
+        width: 200,
+        alignSelf: 'center',
+    },
+    divider:{
+        height: 2,
+        backgroundColor: 'grey',
+        width: 1000,
+        alignSelf: 'center',
+        marginTop: 50
+    },
+    letterColumn: {
+       margin: 50,
+       alignSelf: 'center'
+    },
+    input: {
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+    },
+
 
     /***** Camera *****/
     cameraContainer: {
@@ -91,7 +119,7 @@ module.exports = StyleSheet.create({
         bottom: 20,
         left: 0,
         right: 0,
-        flexDirection: 'row',
+        Direction: 'row',
         justifyContent: 'space-around',
         backgroundColor: 'transparent',
     },
