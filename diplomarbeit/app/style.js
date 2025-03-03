@@ -99,6 +99,41 @@ module.exports = StyleSheet.create({
         margin: 12,
         borderWidth: 1,
         padding: 10,
+        color: '#9c9c9c'
+    },
+    btnStart: {
+        backgroundColor: '#5b6bf5',
+        borderRadius: 5,
+        width: 150,
+        height: 40,
+        color: 'white',
+        alignSelf: 'center',
+        borderColor: '#5b6bf5',
+        
+    },
+    btnNext: {
+        position: 'absolute',
+        backgroundColor: '#5b6bf5',
+        borderRadius: 5,
+        width: 150,
+        height: 40,
+        color: 'white',
+        alignSelf: 'flex-end',
+        borderColor: '#5b6bf5',
+        bottom: 5,
+        right: 50
+    },
+    btnNextDisabled: {
+        position: 'absolute',
+        backgroundColor: '#9c9c9c',
+        borderRadius: 5,
+        width: 150,
+        height: 40,
+        color: 'white',
+        alignSelf: 'flex-end',
+        borderColor: '#9c9c9c',
+        bottom: 5,
+        right: 50
     },
 
 
@@ -243,7 +278,10 @@ module.exports = StyleSheet.create({
         fontSize: 16,
         marginLeft: 50
     },
-    statisticsBox: { flexDirection: 'row', justifyContent: 'center' },
+    statisticsBox: { 
+        flexDirection: 'row', 
+        justifyContent: 'center' 
+    },
 
     /**** Index ****/
     indexContainer: {
@@ -263,5 +301,29 @@ module.exports = StyleSheet.create({
     tempText: {
         width: '50%',
         textAlign: 'center'
-    }
+    },
+    textVisible: {
+        opacity: 1,
+    },
+    textInvisible: {
+        opacity: 0,
+        height: 60
+    },
+
+
+    /**** Carusel ****/
+    carouselContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    carouselView: {
+        flex: 1,
+        justifyContent: "center",
+        shadowColor: '#9c9c9c',
+        shadowRadius: 10,
+        backgroundColor: 'rgba(255, 255, 255, 0.4)',
+        borderRadius: 5,
+        shadowOffset: 5
+    },
 });

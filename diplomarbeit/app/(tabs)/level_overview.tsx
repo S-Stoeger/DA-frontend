@@ -2,6 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import { Text, View,StyleSheet, ScrollView, Button } from "react-native";
 import LevelBox from "@/components/LevelBox";
+import React from "react";
 
 
 export default function Index() {
@@ -97,26 +98,3 @@ export default function Index() {
     </ScrollView>
   );
 }
-
-/*
-
-const styles = StyleSheet.create({
-  scrollContainer: {
-    flexGrow: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingVertical: 10,
-    flexDirection: 'column',
-    alignSelf: 'center',
-    margin: 10,
-    width: '30%'
-  },
-  
-  boxEven: {
-    alignSelf: 'flex-end'
-  },
-  boxOdd: {
-    alignSelf: 'flex-start'
-  },
-})
-  */
