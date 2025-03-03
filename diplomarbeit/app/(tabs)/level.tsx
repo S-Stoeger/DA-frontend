@@ -1,9 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useGlobalSearchParams } from "expo-router";
+import { router, useGlobalSearchParams } from "expo-router";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { View, Image, ScrollView, TextInput, Alert, Text, TouchableOpacity } from "react-native";
-import { Button } from "react-native-paper";
+import { Button, Snackbar } from "react-native-paper";
 import { useSharedValue } from "react-native-reanimated";
 import Carousel, { ICarouselInstance, Pagination } from "react-native-reanimated-carousel";
 
@@ -11,6 +11,11 @@ import Carousel, { ICarouselInstance, Pagination } from "react-native-reanimated
 const styles = require('../style');
 
 export default function Level(){
+
+    const [visible, setSnackBarVisible] = React.useState(false)
+    const onToggleSnackBar = () => setSnackBarVisible(!visible)
+    const onDismissSnackBar = () => setSnackBarVisible(false)
+
 
     const params = useGlobalSearchParams();
     const [text, setText] = useState('');
@@ -70,12 +75,14 @@ export default function Level(){
         }
     }, [text, progress.value]); // Run this when 'text' or 'progress.value' changes
 
-    function progressToNext(){
+    async function progressToNext(){
         if(progress.value <2){
             onPressPagination( progress.value + 1)
         }
         else {
-            onPressPagination( progress.value + 1)
+            setSnackBarVisible(true)
+            await new Promise(resolve => setTimeout(resolve, 3000)); //delay for 3 sek
+            router.push('/(tabs)/level_overview');            
         }    
         setLetterTrue(false)    
     }
@@ -101,6 +108,8 @@ export default function Level(){
     return (
         <ScrollView style={styles.levelDetail}> {
             <View>
+           
+
                 <View style={areLettersVisible ? styles.textVisible : styles.textInvisible}>
                 
                     <h1>Level {params.id}</h1>
@@ -122,13 +131,26 @@ export default function Level(){
                 </View>
             </View>
             
+            
             <View style={styles.carouselContainer}>
+
+                <View style={styles.carouselSnackBar}> 
+                    <Snackbar
+                        visible = {visible}
+                        onDismiss={onDismissSnackBar}
+                        duration={5500}
+                        >
+                            <Text style={{ textAlign: "center", fontSize: 50, color: 'white' }}>Gut Gemacht!</Text>
+                    </Snackbar>
+                </View>
+
                 <View style={areLettersVisible ? styles.textInvisible: styles.textVisible}>
                     <Carousel ref={ref} width={1000} height={600} data={currLevel.gestures} onProgressChange={progress} enabled={false} renderItem=
                     {({ index }) => (
                         <View style={styles.carouselView}>
                             {/*<Text style={{ textAlign: "center", fontSize: 30 }}>{currLevel.gestures[index].letter}</Text> */}
                             <h2>Welcher Buchstabe ist das?</h2>
+                           
                             <View style={styles.letterColumn}>
                                 <Image source={currLevel.gestures[index].imageSource} style={styles.letterPicture} />
                                 <h4>Tippe den Buchstaben ein: </h4>
@@ -140,7 +162,7 @@ export default function Level(){
                                 {checkLetter(currLevel.gestures[index].letter)}
                             </View>
                             <View>
-                                <button style={isRightLetter ? styles.btnNext: styles.btnNextDisabled } onClick={progressToNext} disabled={!isRightLetter}>Weiter</button>
+                                <button style={isRightLetter ? styles.btnNext: styles.btnNextDisabled } onClick={progressToNext} disabled={!isRightLetter}> {progress.value === 2 ? "Fertig" : "Weiter"}</button>
                             </View>
                         </View>
                     )}/>
@@ -148,7 +170,7 @@ export default function Level(){
                     <Pagination.Basic
                         progress={progress}
                         data={currLevel.gestures}
-                        dotStyle={{ backgroundColor: "rgba(0,0,0,0.2)", borderRadius: 50, marginTop: 10 }}
+                        dotStyle={{ backgroundColor: "rgba(0,0,0,0.2)", borderRadius: 50, marginTop: 10, marginBottom: 30 }}
                         containerStyle={{ gap: 5, marginTop: 10 }}
                     />
                 </View>

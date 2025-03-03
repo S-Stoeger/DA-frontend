@@ -307,7 +307,9 @@ module.exports = StyleSheet.create({
     },
     textInvisible: {
         opacity: 0,
-        height: 60
+        height: 0,
+        margin: 0,
+        padding: 0
     },
 
 
@@ -326,4 +328,9 @@ module.exports = StyleSheet.create({
         borderRadius: 5,
         shadowOffset: 5
     },
+    carouselSnackBar: {
+        width: 720,
+        height: 400,
+    }
+
 });
