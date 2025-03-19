@@ -179,8 +179,8 @@ module.exports = StyleSheet.create({
     },
     preview: {
         flex: 1,
-        width: '100%',
-        height: '100%',
+        width: '80%',
+        height: '80%',
     },
     predictionText: {
         fontSize: 30,
@@ -331,6 +331,141 @@ module.exports = StyleSheet.create({
     carouselSnackBar: {
         width: 720,
         height: 400,
-    }
+    },
+
+    modalContainer: {
+        backgroundColor: 'white',
+        padding: 20,
+        margin: 20,
+        borderRadius: 10,
+        flex: 1,
+        maxHeight: '90%',
+      },
+      modalHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 15,
+      },
+      modalTitle: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        flex: 1,
+        textAlign: 'center',
+      },
+      closeButton: {
+        padding: 5,
+      },
+      cameraContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+        height: 500,
+      },
+      camera: {
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+      },
+      cameraInstructions: {
+        position: 'absolute',
+        top: 20,
+        left: 0,
+        right: 0,
+        padding: 15,
+        alignItems: 'center',
+      },
+      cameraInstructionText: {        
+        fontSize: 22,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: '#ffffff'
+      },
+      challengeProgress: {
+        width: '100%',
+        padding: 10,
+        marginBottom: 10,
+        backgroundColor: '#f0f0f0',
+        borderRadius: 5,
+      },
+      challengeText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'center',
+      },
+      buttonContainer: {
+        position: 'absolute',
+        bottom: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '100%',
+      },
+      button: {
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+        padding: 15,
+        borderRadius: 10,
+        alignItems: 'center',
+        margin: 10,
+      },
+      text: {
+        color: 'white',
+        fontSize: 16,
+      },
+      preview: {
+        width: '100%',
+        height: 400,
+        resizeMode: 'contain',
+      },
+      predictionContainer: {
+        marginTop: 20,
+        padding: 10,
+        alignItems: 'center',
+        width: '100%',
+      },
+      predictionText: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 10,
+      },
+      predictionResult: {
+        alignItems: 'center',
+        marginTop: 10,
+      },
+      successText: {
+        color: 'green',
+        fontSize: 18,
+        textAlign: 'center',
+        marginVertical: 10,
+      },
+      errorText: {
+        color: 'red',
+        fontSize: 18,
+        textAlign: 'center',
+        marginVertical: 10,
+      },
+      continueButton: {
+        backgroundColor: 'green',
+        padding: 15,
+        borderRadius: 10,
+        marginTop: 10,
+      },
+      retakeButton: {
+        backgroundColor: 'blue',
+        padding: 15,
+        borderRadius: 10,
+        marginTop: 10,
+      },
+      buttonText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+      },
+      message: {
+        fontSize: 18,
+        textAlign: 'center',
+        marginBottom: 20,
+      }
 
 });
